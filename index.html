@@ -108,45 +108,31 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const form = document.getElementById("inquiryForm");
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
 
-      if (!form) return;
+  if (!form.checkValidity()) {
+    event.stopPropagation();
+    form.classList.add("was-validated");
+  } else {
+    const studentData = {
+      name: document.getElementById("studentName").value.trim(),
+      email: document.getElementById("studentEmail").value.trim()
+    };
 
-      form.addEventListener("submit", (event) => {
-        event.preventDefault();
-        
-        // Native HTML constraint validation check
-        if (!form.checkValidity()) {
-          event.stopPropagation();
-          form.classList.add("was-validated");
-        } else {
-          const studentNameInput = document.getElementById("studentName");
-          const studentEmailInput = document.getElementById("studentEmail");
-
-          const studentData = {
-            name: studentNameInput.value.trim(),
-            email: studentEmailInput.value.trim(),
-            submittedAt: new Date().toISOString()
-          };
-
-          // Save submission data to localStorage
-          <!--try {
-            localStorage.setItem("lastSubmission", JSON.stringify(studentData));
-          } catch (error) {
-            console.error("Storage access prevented:", error);
-          }--!>
-          try {
-            sessionStorage.setItem("lastSubmission", JSON.stringify(studentData));
-          } catch (error) {
-            console.error("Storage access prevented:", error);
-          }
-          alert("Thank you! Your inquiry has been submitted successfully.");
-          
-          // Reset form and UI state
-          form.reset();
-          form.classList.remove("was-validated");
-        }
-      });
+    fetch("https://script.google.com/macros/s/AKfycbzy5n6Mnju66auYWgTCP57jmUtDFxdNDmFzvnH2qAHh6pDOkTw3hGsYbqBYs_haHE-irw/exec", {
+      method: "POST",
+      body: JSON.stringify(studentData)
+    })
+    .then(response => {
+      alert("Thank you! Your inquiry has been submitted.");
+      form.reset();
+      form.classList.remove("was-validated");
+    })
+    .catch(error => console.error("Error submitting form:", error));
+    }
     });
+ });
   </script>
 </body>
 </html>
