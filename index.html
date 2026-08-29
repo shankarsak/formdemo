@@ -134,7 +134,11 @@
           } catch (error) {
             console.error("Storage access prevented:", error);
           }
-
+          try {
+            sessionStorage.setItem("lastSubmission", JSON.stringify(studentData));
+          } catch (error) {
+            console.error("Storage access prevented:", error);
+          }
           alert("Thank you! Your inquiry has been submitted successfully.");
           
           // Reset form and UI state
