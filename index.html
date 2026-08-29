@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Inquiry Form</title>
+  <title>Extended Student Detail Form</title>
   
   <!-- Bootstrap 5 CSS Framework -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -25,6 +25,13 @@
       padding-bottom: 3rem;
     }
 
+    .form-card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      padding: 2.5rem;
+    }
+
     .btn-primary {
       background-color: var(--primary-navy);
       border-color: var(--primary-navy);
@@ -40,42 +47,110 @@
 <body>
 
   <section class="contact-section" id="contact">
-    <div class="container" style="max-width: 600px;">
-      <h2 class="section-title text-center mb-4">Student Inquiry Form</h2>
-      
-      <form id="inquiryForm" class="needs-validation" novalidate>
-        <div class="mb-3">
-          <label for="studentName" class="form-label">Full Name</label>
-          <input 
-            type="text" 
-            class="form-control" 
-            id="studentName" 
-            required 
-            aria-describedby="nameFeedback"
-            autocomplete="name"
-          >
-          <div id="nameFeedback" class="invalid-feedback">
-            Please enter your full name.
-          </div>
-        </div>
+    <div class="container" style="max-width: 750px;">
+      <div class="form-card">
+        <h2 class="section-title text-center mb-4">Student Registration Form</h2>
+        
+        <form id="inquiryForm" class="needs-validation" novalidate>
+          
+          <!-- Personal Information Row -->
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="fullName" class="form-label">Full Name</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="fullName" 
+                required 
+                autocomplete="name"
+                placeholder="e.g. John Doe"
+              >
+              <div class="invalid-feedback">Please enter student's full name.</div>
+            </div>
 
-        <div class="mb-3">
-          <label for="studentEmail" class="form-label">Email Address</label>
-          <input 
-            type="email" 
-            class="form-control" 
-            id="studentEmail" 
-            required 
-            aria-describedby="emailFeedback"
-            autocomplete="email"
-          >
-          <div id="emailFeedback" class="invalid-feedback">
-            Please enter a valid email address.
+            <div class="col-md-6 mb-3">
+              <label for="studentEmail" class="form-label">Email Address</label>
+              <input 
+                type="email" 
+                class="form-control" 
+                id="studentEmail" 
+                required 
+                autocomplete="email"
+                placeholder="name@example.com"
+              >
+              <div class="invalid-feedback">Please enter a valid email address.</div>
+            </div>
           </div>
-        </div>
 
-        <button type="submit" id="submitBtn" class="btn btn-primary w-100">Submit Inquiry</button>
-      </form>
+          <!-- Contact & Demographics Row -->
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="studentPhone" class="form-label">Phone Number</label>
+              <input 
+                type="tel" 
+                class="form-control" 
+                id="studentPhone" 
+                required 
+                pattern="[0-9]{10}"
+                placeholder="10-digit phone number"
+              >
+              <div class="invalid-feedback">Please enter a valid 10-digit phone number.</div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="studentDOB" class="form-label">Date of Birth</label>
+              <input 
+                type="date" 
+                class="form-control" 
+                id="studentDOB" 
+                required
+              >
+              <div class="invalid-feedback">Please select date of birth.</div>
+            </div>
+          </div>
+
+          <!-- Academic & Gender Row -->
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="studentGender" class="form-label">Gender</label>
+              <select class="form-select" id="studentGender" required>
+                <option value="" selected disabled>Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+              <div class="invalid-feedback">Please select a gender option.</div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="courseSelect" class="form-label">Course Applied For</label>
+              <select class="form-select" id="courseSelect" required>
+                <option value="" selected disabled>Select Course</option>
+                <option value="Computer Science">Computer Science</option>
+                <option value="Information Technology">Information Technology</option>
+                <option value="Business Administration">Business Administration</option>
+                <option value="Data Science">Data Science</option>
+              </select>
+              <div class="invalid-feedback">Please select a course.</div>
+            </div>
+          </div>
+
+          <!-- Address Row -->
+          <div class="mb-3">
+            <label for="studentAddress" class="form-label">Full Address</label>
+            <textarea 
+              class="form-control" 
+              id="studentAddress" 
+              rows="3" 
+              required
+              placeholder="Enter complete residential address"
+            ></textarea>
+            <div class="invalid-feedback">Please provide an address.</div>
+          </div>
+
+          <button type="submit" id="submitBtn" class="btn btn-primary w-100 py-2 fs-5 mt-2">Submit Student Record</button>
+        </form>
+      </div>
     </div>
   </section>
 
@@ -83,7 +158,7 @@
     document.addEventListener("DOMContentLoaded", () => {
       const form = document.getElementById("inquiryForm");
       const submitBtn = document.getElementById("submitBtn");
-      const scriptURL = "https://script.google.com/macros/s/AKfycbwSclwO6LwIhSqI2fa-4dsHEayhqY19au5QRrfTcQwXseY34RszpxtCoMqfmk8EmgCxiw/exec";
+      const scriptURL = "https://script.google.com/macros/s/AKfycbzy5n6Mnju66auYWgTCP57jmUtDFxdNDmFzvnH2qAHh6pDOkTw3hGsYbqBYs_haHE-irw/exec";
 
       form.addEventListener("submit", (event) => {
         event.preventDefault();
@@ -93,14 +168,18 @@
           form.classList.add("was-validated");
         } else {
           submitBtn.disabled = true;
-          submitBtn.innerText = "Submitting...";
+          submitBtn.innerText = "Submitting Record...";
 
           const studentData = {
-            name: document.getElementById("studentName").value.trim(),
-            email: document.getElementById("studentEmail").value.trim()
+            fullName: document.getElementById("fullName").value.trim(),
+            email: document.getElementById("studentEmail").value.trim(),
+            phone: document.getElementById("studentPhone").value.trim(),
+            dob: document.getElementById("studentDOB").value,
+            gender: document.getElementById("studentGender").value,
+            course: document.getElementById("courseSelect").value,
+            address: document.getElementById("studentAddress").value.trim()
           };
 
-          // Send POST request with text/plain to bypass CORS browser blocks
           fetch(scriptURL, {
             method: "POST",
             mode: "no-cors",
@@ -110,17 +189,17 @@
             body: JSON.stringify(studentData)
           })
           .then(() => {
-            alert("Thank you! Your inquiry has been submitted.");
+            alert("Success! Student details have been successfully recorded.");
             form.reset();
             form.classList.remove("was-validated");
           })
           .catch(error => {
-            console.error("Error submitting form:", error);
-            alert("Submission failed. Please try again.");
+            console.error("Error submitting details:", error);
+            alert("Submission failed. Please check network connectivity.");
           })
           .finally(() => {
             submitBtn.disabled = false;
-            submitBtn.innerText = "Submit Inquiry";
+            submitBtn.innerText = "Submit Student Record";
           });
         }
       });
